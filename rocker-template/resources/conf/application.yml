@@ -1,0 +1,6 @@
+# application.yml - Server configuration
+server:
+
+  # Enable static routing for your assets files.
+  static:
+    enabled: true
