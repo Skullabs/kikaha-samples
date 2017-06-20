@@ -1,0 +1,50 @@
+server:
+
+  # REST API defaults
+  urouting: { default-content-type: "application/json" }
+
+  # Static Content
+  static: { enabled: true }
+
+  # Smart Routes
+  smart-routes:
+    # Authentication URLs for Login and Logout will automatically enabled
+    auth: { enabled: true }
+
+  auth:
+
+    # Replacing the StatelessSessionStore with in-memory implementation of a SessionStore.
+    # By default, Kikaha uses a SessionStore that keep the server stateless. If you keep the default
+    # store, you will have to send credentials every request you made.
+    session-store: kikaha.core.modules.security.InMemorySessionStore
+
+    # Authentication rules
+    rules:
+      # every URL will be protected by the Form Authentication Mechanism.
+      - { pattern: "/*", auth-mechanisms: [ "form" ] }
+
+    # Authentication endpoint configurations
+    endpoints:
+
+      # the template file with will be displayed every time a login page is rendered.
+      login-template: "/webapp/login.html"
+
+      # This is the URL that users will be redirected to every time an authentication
+      # is required. Also, once the 'server.smart-routes.auth' is set to 'true', Kikaha
+      # will automatically render the "login-template" page defined above.
+      login-page: "/auth/login"
+
+      # Once the 'server.smart-routes.auth' is set to 'true', Kikaha will automatically
+      # deploy a route at this URL to handle the 'Logout'.
+      logout-url: "/auth/logout"
+
+      # An URL to redirect every time a Login have failed.
+      error-page: "/auth/login?failed=true"
+
+      # The URL the Form Authentication Mechanism will wait for credentials.
+      callback-url: "/auth/verify"
+
+    # The default identity manager uses fixed username and password to check user credentials
+    fixed-auth:
+      username: "admin"
+      password: "123456"
