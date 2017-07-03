@@ -1,0 +1,6 @@
+server:
+
+  # Static Routing configuration
+  static:
+    enabled: true
+    webjar-enabled: true
