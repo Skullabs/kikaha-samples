@@ -1,0 +1,39 @@
+server:
+
+  # forcing uRouting API to use "application/json" as Content-Type
+  # this will make the controller logic a lil' less verbose!
+  urouting:
+    default-content-type: "application/json"
+    content-type-priority: "CONFIG"
+
+  # defines how the authentication should behave.
+  auth:
+
+    # let's use fixed credentials for the sake of simplicity
+    fixed-auth:
+      username: "admin"
+      password: "admin"
+      role: "admin"
+
+    # since 2.1.x kikaha will not store session objects into the memory by its default configuration.
+    # session-store: kikaha.core.modules.security.StatelessSessionStore
+
+    endpoints:
+      # the CustomJSONAuthenticationMechanism will check for credentials on this URL
+      callback-url: "/api/json/verify"
+
+    auth-mechanisms:
+      json: kikaha.samples.jwt.CustomJSONAuthenticationMechanism
+      jwt: kikaha.samples.jwt.JWTAuthenticationMechanism
+
+    rules:
+      - { pattern: "/api/json/verify", auth-mechanisms: ["json"], identity-managers: [ "fixed" ] }
+      - { pattern: "/api/*", auth-mechanisms: [ "jwt" ], exclude-patterns: [ "/api/token/create" ] }
+
+  # My custom JWT settings
+  # See kikaha.samples.jwt.JwtSettings for more details.
+  jwt:
+    token-expiration-time: 1
+    refresh-token-expiration-time: 10
+    key-issuer: "issuer"
+    singing-key: "my-key"
