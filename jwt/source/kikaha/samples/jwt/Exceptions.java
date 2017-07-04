@@ -31,7 +31,7 @@ public interface Exceptions {
 					.entity( exception.getMessage() );
 		}
 	}
-	
+
 	@Singleton
 	class JwtExpiredTokenExceptionHandler implements ExceptionHandler<JwtExpiredTokenException> {
 		@Override
