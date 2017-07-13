@@ -1,0 +1,12 @@
+server:
+
+  # uRouting API configured to use only Protobuf as serializer and deserializer.
+  urouting:
+    default-content-type: "application/octet-stream"
+    content-type-priority: "REQUEST"
+
+  https:
+    enabled: true
+    http2-mode: true
+    keystore: "letsencrypt.jks"
+    password: "123456"
