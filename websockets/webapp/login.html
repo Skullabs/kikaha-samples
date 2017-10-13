@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Chat - Login</title>
+
+    <link rel="stylesheet" href="/assets/roboto-fontface/0.7.0/css/roboto/roboto-fontface.css">
+    <link rel="stylesheet" href="/assets/normalize.css/7.0.0/normalize.css">
+    <link rel="stylesheet" href="/assets/milligram/1.3.0/dist/milligram.min.css">
+    <script src="/assets/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+
+        .container {
+            max-width: 300px;
+            margin: 40px auto;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <form id="form">
+            <label>Username</label>
+            <input type="text" id="username">
+            <label>Password</label>
+            <input type="password" id="password">
+            <button class="button">Sign In</button>
+        </form>
+
+    </div>
+
+    <script>
+
+        $(function(){
+
+            console.log("Initializing chat login...")
+
+            function onSubmit( e ){
+                e.preventDefault()
+
+                var login = {
+                    username: $("#username").val(),
+                    password: $("#password").val()
+                }
+
+                $.post({
+                    url: "/api/auth/callback",
+                    data: JSON.stringify( login ),
+                    contentType: 'application/json',
+                    success: function(){
+                        document.location.href = "/chat.html"
+                    },
+                    error: function(){
+                        alert("Ops! Wrong credentials.");
+                    }
+                })
+            }
+
+            $("#form").submit(onSubmit)
+        })
+
+    </script>
+
+</body>
+</html>

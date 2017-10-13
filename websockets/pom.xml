@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>io.skullabs.kikaha</groupId>
+		<artifactId>kikaha-project</artifactId>
+        <version>
+            <!-- var-kikaha-version -->2.1.1.Final<!-- /var-kikaha-version -->
+        </version>
+    </parent>
+
+	<groupId>websockets</groupId>
+	<artifactId>websockets</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>${project.artifactId}</name>
+
+	<properties>
+		<!-- project configurations -->
+		<config.dir.source>source</config.dir.source>
+		<config.dir.resource>resources</config.dir.resource>
+		<config.dir.test.source>tests</config.dir.test.source>
+		<config.dir.test.resource>tests-resources</config.dir.test.resource>
+		<config.dir.output>output</config.dir.output>
+		<config.dir.web>webapp</config.dir.web>
+
+		<!-- dependencies version configuration -->
+        <version.jdbi>3.0.0-beta3</version.jdbi>
+        <version.jquery>3.2.1</version.jquery>
+        <version.milligram>1.3.0</version.milligram>
+        <version.normalize>7.0.0</version.normalize>
+        <version.roboto>0.7.0</version.roboto>
+        <version.h2>1.4.196</version.h2>
+	</properties>
+
+	<dependencies>
+        <!-- Basic core dependencies -->
+		<dependency>
+			<groupId>io.skullabs.kikaha</groupId>
+			<artifactId>kikaha-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.skullabs.kikaha</groupId>
+			<artifactId>kikaha-urouting</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.skullabs.kikaha</groupId>
+			<artifactId>kikaha-jackson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+
+        <!-- Database related dependencies -->
+        <dependency>
+            <groupId>io.skullabs.kikaha</groupId>
+            <artifactId>kikaha-db</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi3-core</artifactId>
+            <version>${version.jdbi}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${version.h2}</version>
+        </dependency>
+
+        <!-- UI Libraries -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>${version.jquery}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>milligram</artifactId>
+            <version>${version.milligram}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>normalize.css</artifactId>
+            <version>${version.normalize}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>roboto-fontface</artifactId>
+            <version>${version.roboto}</version>
+        </dependency>
+    </dependencies>
+
+</project>

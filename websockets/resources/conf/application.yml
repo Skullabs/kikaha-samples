@@ -1,0 +1,56 @@
+server:
+
+  # Enabling static routing and webjars
+  static: { enabled: true, webjar-enabled: true }
+
+  # Configuring JSON as default for all requests: REST APIs and WebSockets
+  urouting:
+    default-content-type: "application/json"
+
+  websocket:
+    default-serializer: "application/json"
+    default-unserializer: "application/json"
+
+  # Some automatic routes, handled by Kikaha
+  smart-routes:
+    auth:
+      login-form-enabled: false
+      logout-url-enabled: true
+      logout-http-method: "POST"
+
+  # DataBase configuration.
+  db:
+    datasources:
+      default:
+        jdbc-url: "jdbc:h2:mem:test"
+        username: "username"
+        password: "p@$5w0rd"
+        log-query-execution-longer-than-ms: 20
+        pool-max-size: 10
+
+  auth:
+
+    # Storing session into memory. Please change for a more scalable mechanism when deploying
+    # this application on your production environment.
+    session-store: kikaha.core.modules.security.InMemorySessionStore
+
+    # Which URLs should be used during the authentication/authorization process
+    endpoints:
+      permission-denied-page: "/forbidden.html"
+      callback-url: "/api/auth/callback"
+      logout-url: "/api/auth/logout"
+      login-page: "/login.html"
+
+    # Configuring the DatabaseAuthenticationMechanism
+    # How to check user's password and its roles.
+    db-auth:
+      select-user-password: "SELECT password FROM USERS WHERE username = ?"
+      select-user-roles: "SELECT r.name FROM ROLES r, USERS u, USER_ROLES ur WHERE ur.role_id = r.id AND ur.user_id = u.id AND u.username = ?"
+
+    # Every single request should be authenticated
+    rules:
+     - { pattern: "/api/*", auth-mechanisms: [ "json" ], identity-managers: [ "db-auth" ] }
+     - { pattern: "/*", auth-mechanisms: [ "form" ], identity-managers: [ "db-auth" ] }
+
+    # Rules will ignore all matched patterns bellow
+    default-excluded-patterns: [ "/assets/*" ]
