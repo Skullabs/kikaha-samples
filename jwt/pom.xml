@@ -5,7 +5,7 @@
 
     <parent>
         <groupId>io.skullabs.kikaha</groupId>
-        <version>2.1.1.Final</version>
+        <version>2.1.2.Final</version>
         <artifactId>kikaha-project</artifactId>
     </parent>
 
@@ -20,14 +20,11 @@
         <config.dir.test.source>tests</config.dir.test.source>
         <config.dir.test.resource>tests-resources</config.dir.test.resource>
         <config.dir.output>output</config.dir.output>
-        <config.dir.web>webapp</config.dir.web>
+
+        <config.plugins.jar.enabled>true</config.plugins.jar.enabled>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>io.skullabs.kikaha</groupId>
-            <artifactId>kikaha-core</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.skullabs.kikaha</groupId>
             <artifactId>kikaha-urouting</artifactId>
@@ -41,7 +38,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
-
         <!-- jwt dependencies -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -49,5 +45,7 @@
             <version>0.7.0</version>
         </dependency>
     </dependencies>
+
+    
 
 </project>
